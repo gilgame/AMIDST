@@ -49,8 +49,7 @@ public class BiomeWidget extends PanelWidget {
 		
 		Collections.sort(biomes, new Comparator<Biome>() {
 			@Override
-			public int compare(Biome a, Biome b)
-			{
+			public int compare(Biome a, Biome b) {
 				return a.name.compareTo(b.name);
 			}
 		});

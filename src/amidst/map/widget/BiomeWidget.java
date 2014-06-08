@@ -6,6 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import amidst.logging.Log;
 import amidst.map.layers.BiomeLayer;
@@ -44,6 +46,15 @@ public class BiomeWidget extends PanelWidget {
 				maxNameWidth = Math.max(fontMetrics.stringWidth(Biome.biomes[i].name), maxNameWidth);
 			}
 		}
+		
+		Collections.sort(biomes, new Comparator<Biome>() {
+			@Override
+			public int compare(Biome a, Biome b)
+			{
+				return a.name.compareTo(b.name);
+			}
+		});
+		
 		biomeListHeight = biomes.size() * 16;
 		setDimensions(250, 400);
 		y = 100;

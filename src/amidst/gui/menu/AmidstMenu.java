@@ -65,6 +65,7 @@ public class AmidstMenu extends JMenuBar {
 				add(new SeedMenuItem());
 				add(new FileMenuItem());
 				add(new RandomSeedMenuItem());
+				add(new SeedFinderMenuItem());
 				//add(new JMenuItem("From Server"));
 			}});
 			
@@ -217,6 +218,32 @@ public class AmidstMenu extends JMenuBar {
 							if (worldType != null) {
 								window.clearProject();
 								window.setProject(new Project(seed, worldType.getValue()));
+							}
+						}
+					
+				});
+			}
+		}
+		
+		private class SeedFinderMenuItem extends JMenuItem {
+			private SeedFinderMenuItem() {
+				super("Seed Finder");
+				setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, InputEvent.CTRL_DOWN_MASK));
+				addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						//Create the JOptionPane.
+							String worldTypePreference = Options.instance.worldType.get();
+							SaveLoader.Type worldType = null;
+							if (worldTypePreference.equals("Prompt each time")) {
+								worldType = SaveLoader.Type.fromMixedCase("Default");
+							} else {
+								worldType = SaveLoader.Type.fromMixedCase(worldTypePreference);
+							}
+							
+							//If a string was returned, say so.
+							if (worldType != null) {
+								window.startFinder(worldType.getValue());
 							}
 						}
 					
